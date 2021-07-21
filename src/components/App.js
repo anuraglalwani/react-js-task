@@ -1,12 +1,15 @@
 /* eslint-disable array-callback-return */
+
 import React, { useEffect, useState } from 'react';
 import ListData from "./ListData";
 import ToggleButton from "./ToggleButton";
 import TableData from "./TableData";
+require('dotenv').config()
 
 function App() {
    const [data,setData]=useState([]);
    //integrating and fetching data from an open API to show in components 
+   console.log(process.env.REACT_APP_API_KEY);
     useEffect(()=>{
       var axios = require("axios").default;
       var options = {
@@ -14,7 +17,7 @@ function App() {
               url: 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/TrendingNewsAPI',
               params: {pageNumber: '1', pageSize: '10', withThumbnails: 'false', location: 'us'},
               headers: {
-                'x-rapidapi-key': '8dfbc6e8b4msh8cf9b23cff7c516p1679e8jsnbfa4770332ab',
+                'x-rapidapi-key': process.env.REACT_APP_API_KEY, //this is private API key in env file, for testing use your own API key
                 'x-rapidapi-host': 'contextualwebsearch-websearch-v1.p.rapidapi.com'
               }
             };
